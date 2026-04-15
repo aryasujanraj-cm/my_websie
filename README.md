@@ -1,2 +1,2 @@
-# my_websie
+# my_crypto
 AI app for trading 
