@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CryptoAI Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="background-grid"></div>
+  <div class="background-glow background-glow-left"></div>
+  <div class="background-glow background-glow-right"></div>
+  <aside id="notificationsPanel" class="notifications-panel" aria-live="polite" aria-atomic="true"></aside>
+
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div class="brand">
+        <span class="brand-mark"></span>
+        <div>
+          <span class="brand-name">CryptoAI</span>
+          <p class="brand-tagline">Smart crypto market intelligence</p>
+        </div>
+      </div>
+      <div class="nav-status">
+        <span id="statusBadge" class="status-badge">Loading...</span>
+        <span id="lastUpdated" class="last-updated">Last updated: --</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="app-shell">
+    <section class="hero">
+      <div class="hero-copy-wrap">
+        <p class="eyebrow">Professional Trading Dashboard</p>
+        <h1>Track market momentum, signals, charts, and your live crypto portfolio.</h1>
+        <p class="hero-copy">
+          Monitor the top 50 cryptocurrencies in a single dark-mode workspace designed for quick scanning and confident decisions.
+        </p>
+      </div>
+      <div class="hero-metrics">
+        <article class="metric-card">
+          <span class="metric-label">Assets Tracked</span>
+          <strong class="metric-value">50</strong>
+        </article>
+        <article class="metric-card">
+          <span class="metric-label">Refresh Cycle</span>
+          <strong class="metric-value">20s</strong>
+        </article>
+        <article class="metric-card">
+          <span class="metric-label">Portfolio Sync</span>
+          <strong class="metric-value">Live</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="dashboard-card recommendation-panel">
+      <div class="card-header recommendation-header">
+        <div>
+          <p class="eyebrow">AI Recommendations</p>
+          <h2>Find the best coin for your next move</h2>
+        </div>
+        <div class="recommendation-controls">
+          <label class="sr-only" for="investmentInput">Enter investment amount</label>
+          <input id="investmentInput" type="text" inputmode="decimal" placeholder="Enter investment amount (₹, $, €, £, ¥)">
+          <button id="recommendButton" class="recommendation-button" type="button">Find Best Coin</button>
+        </div>
+      </div>
+      <div class="recommendation-grid">
+        <article class="best-recommendation">
+          <span class="recommendation-kicker">Top Pick</span>
+          <h3 id="bestCoinName">Waiting for live market scan</h3>
+          <p id="bestCoinReason" class="recommendation-copy">
+            Enter an amount and run the scanner to identify the strongest opportunity from the current market data.
+          </p>
+          <div class="recommendation-stats">
+            <div class="recommendation-stat">
+              <span>Confidence</span>
+              <strong id="bestCoinConfidence">--</strong>
+            </div>
+            <div class="recommendation-stat">
+              <span>Suggested Allocation</span>
+              <strong id="bestCoinAllocation">--</strong>
+            </div>
+          </div>
+          <p id="recommendationSummary" class="recommendation-summary">No analysis run yet.</p>
+          <div class="affiliate-actions">
+            <a
+              id="recommendAffiliateLink"
+              class="affiliate-button"
+              href="https://invite.coindcx.com/61707419"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Start investing in this coin (Recommended)
+            </a>
+          </div>
+        </article>
+
+        <div class="top-recommendations">
+          <div class="top-recommendations-header">
+            <span class="recommendation-kicker">Top 3 Ranked Coins</span>
+            <p id="distributionSuggestion" class="distribution-suggestion">Distribution suggestion will appear here.</p>
+          </div>
+          <div id="topRecommendationsList" class="top-recommendations-list">
+            <p class="empty-state recommendation-empty">No recommendations available yet.</p>
+          </div>
+        </div>
+      </div>
+      <p class="risk-note">Crypto investments are risky. This is not financial advice.</p>
+    </section>
+
+    <section class="dashboard-card tips-panel">
+      <div class="card-header tips-header">
+        <div>
+          <p class="eyebrow">Smart Pro Tips</p>
+          <h2>Live market guidance</h2>
+        </div>
+      </div>
+      <div class="tips-body">
+        <p id="marketTip" class="tip-message">Scanning market conditions...</p>
+        <p id="portfolioTip" class="tip-message">Portfolio guidance will appear once your holdings are added.</p>
+      </div>
+    </section>
+
+    <section class="dashboard-card panel">
+      <div class="card-header toolbar">
+        <div>
+          <p class="eyebrow">Market</p>
+          <h2>Live Crypto Market</h2>
+        </div>
+        <div class="search-wrap">
+          <label class="sr-only" for="searchInput">Search coins</label>
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Search by coin name or symbol"
+            autocomplete="off"
+          >
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Coin</th>
+              <th>Symbol</th>
+              <th>Price (USD)</th>
+              <th>24h Change</th>
+              <th>Signal</th>
+              <th>Portfolio</th>
+            </tr>
+          </thead>
+          <tbody id="cryptoTableBody" class="loading-table">
+            <tr>
+              <td colspan="6" class="empty-state">Loading market data...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="dashboard-grid">
+      <section class="dashboard-card portfolio-panel">
+        <div class="card-header portfolio-header">
+          <div>
+            <p class="eyebrow">Portfolio</p>
+            <h2>My Portfolio</h2>
+          </div>
+          <div class="portfolio-total-wrap">
+            <span class="portfolio-total-label">Total Value</span>
+            <strong id="portfolioTotal" class="portfolio-total">$0.00</strong>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Coin</th>
+                <th>Buy Price</th>
+                <th>Amount Owned</th>
+                <th>Invested</th>
+                <th>Current Value</th>
+                <th>P/L</th>
+              </tr>
+            </thead>
+            <tbody id="portfolioTableBody">
+              <tr>
+                <td colspan="6" class="empty-state">Your portfolio is empty. Add coins from the table above.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="portfolio-summary">
+          <div class="portfolio-summary-item">
+            <span>Total Invested</span>
+            <strong id="portfolioInvested">$0.00</strong>
+          </div>
+          <div class="portfolio-summary-item">
+            <span>Total Profit / Loss</span>
+            <strong id="portfolioProfitLoss">$0.00 (0.00%)</strong>
+          </div>
+        </div>
+        <div class="affiliate-actions portfolio-affiliate">
+          <a
+            id="portfolioAffiliateLink"
+            class="affiliate-button secondary-affiliate-button"
+            href="https://invite.coindcx.com/61707419"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Buy via CoinDCX
+          </a>
+        </div>
+      </section>
+
+      <section class="dashboard-card chart-panel">
+        <div class="card-header chart-header">
+          <div>
+            <p class="eyebrow">Chart</p>
+            <h2 id="chartTitle">Select a coin to view its price chart</h2>
+          </div>
+          <p id="chartStatus" class="chart-status">Click any table row to load historical pricing.</p>
+        </div>
+        <div id="chartWrap" class="chart-wrap">
+          <div class="chart-loader">
+            <span class="loader-dot"></span>
+            <span class="loader-dot"></span>
+            <span class="loader-dot"></span>
+          </div>
+          <canvas id="priceChart"></canvas>
+        </div>
+        <div class="affiliate-actions chart-affiliate">
+          <a
+            id="chartAffiliateLink"
+            class="affiliate-button secondary-affiliate-button"
+            href="https://invite.coindcx.com/61707419"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Start investing in this coin (Recommended)
+          </a>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
