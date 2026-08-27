@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Framecraft — Vector Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="dashboard-nav-link" href="../">Back to Crypto Dashboard</a>
+    <div class="brand"><span class="brand-mark">F</span><span>Framecraft</span><span class="slash">/</span><strong>Untitled Project</strong></div>
+    <div class="top-actions">
+      <div class="history-actions"><button class="icon-btn" id="undoBtn" title="Undo" aria-label="Undo">↶</button><button class="icon-btn" id="redoBtn" title="Redo" aria-label="Redo">↷</button></div>
+      <div class="zoom-control"><button class="icon-btn" id="zoomOut" aria-label="Zoom out">−</button><span id="zoomValue">100%</span><button class="icon-btn" id="zoomIn" aria-label="Zoom in">+</button></div>
+      <label class="preview-toggle"><input id="previewToggle" type="checkbox"><span class="toggle-track"></span><span>Preview</span></label>
+      <button class="export-btn" id="exportBtn"><span>Export Code</span><small>HTML / CSS / JS</small><span class="export-arrow">↗</span></button>
+    </div>
+  </header>
+
+  <main class="studio">
+    <aside class="toolbar" aria-label="Design tools">
+      <div class="tool-group">
+        <button class="tool active" data-tool="select" title="Select / Move" aria-label="Select / Move"><svg viewBox="0 0 24 24"><path d="m5 3 5.7 15 2.1-6.2L19 9.7 5 3Z"/><path d="m13 13 4.5 5"/></svg></button>
+        <button class="tool" data-tool="rectangle" title="Rectangle" aria-label="Rectangle"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="1"/></svg></button>
+        <button class="tool" data-tool="circle" title="Circle" aria-label="Circle"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/></svg></button>
+        <button class="tool" data-tool="pen" title="Pen / Draw" aria-label="Pen / Draw"><svg viewBox="0 0 24 24"><path d="m4 20 4.6-1 9.8-9.8a2.1 2.1 0 0 0-3-3L5.6 16 4 20Z"/><path d="m13.7 7.3 3 3"/></svg></button>
+        <button class="tool" data-tool="text" title="Text" aria-label="Text"><span class="text-icon">T</span></button>
+        <button class="tool" data-tool="image" title="Insert image" aria-label="Insert image"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="1"/><circle cx="9" cy="10" r="1.4"/><path d="m5 17 4.2-4 3 2.5 2.2-2.1L19 17"/></svg></button>
+        <button class="tool" data-tool="gradient" title="Gradient / Blend" aria-label="Gradient / Blend"><svg viewBox="0 0 24 24"><circle cx="9" cy="12" r="5.5"/><circle cx="15" cy="12" r="5.5"/></svg></button>
+      </div>
+      <div class="toolbar-bottom"><button class="tool" title="Settings" aria-label="Settings">⚙</button><span class="shortcut">⌘ K</span></div>
+    </aside>
+
+    <section class="canvas-wrap">
+      <div class="canvas-meta"><span><i class="live-dot"></i> Canvas / Home</span><span id="selectionMeta">1 selected</span></div>
+      <div class="canvas-stage" id="canvasStage">
+        <div class="artboard" id="artboard">
+          <div class="artboard-top"><span>MONO / 24</span><span>WORKSPACE</span></div>
+          <div class="hero-art" data-layer="Hero statement"><p class="art-eyebrow">Digital product studio</p><h1>Make the<br><em>invisible</em><br>visible.</h1><p class="art-copy">A flexible canvas for ideas that move at the speed of thought.</p><button class="art-button">Explore system <span>↗</span></button></div>
+          <div class="orbit-shape shape-selected" data-layer="Orbit / blend"><span class="orbit-core"></span><span class="orbit-ring ring-one"></span><span class="orbit-ring ring-two"></span></div>
+          <div class="mini-card" data-layer="Signal card"><span class="mini-label">SYSTEM STATUS</span><strong>Everything<br>is connected.</strong><div class="mini-line"></div><span class="mini-footer">/ 04.2024</span></div>
+          <div class="selection-box" id="selectionBox"><span class="handle tl"></span><span class="handle tr"></span><span class="handle bl"></span><span class="handle br"></span><span class="rotation-handle"></span></div>
+        </div>
+      </div>
+      <div class="canvas-footer"><span>⌘ + scroll to zoom</span><span>Space + drag to pan</span><span id="toolStatus">Select tool active</span></div>
+    </section>
+
+    <aside class="inspector">
+      <div class="inspector-tabs"><button class="inspector-tab active" data-tab="design">Design</button><button class="inspector-tab" data-tab="layers">Layers <span>3</span></button></div>
+      <div class="inspector-content" id="designPanel">
+        <div class="panel-section"><div class="section-title"><span>Position</span><span class="section-icon">⌗</span></div><div class="field-grid"><label>X<input value="428" data-prop="x"></label><label>Y<input value="188" data-prop="y"></label><label>W<input value="312" data-prop="w"></label><label>H<input value="312" data-prop="h"></label></div><label class="field-wide">Rotation <input value="-12°" data-prop="rotation"></label></div>
+        <div class="panel-section"><div class="section-title"><span>Fill</span><span class="color-chip"></span></div><div class="fill-row"><button class="fill-swatch"></button><input value="#9C7BFF" data-prop="fill"><span class="chevron">⌄</span></div><div class="blend-row"><span>Gradient / Blend</span><strong>Screen</strong><span class="chevron">⌄</span></div></div>
+        <div class="panel-section"><div class="section-title"><span>Appearance</span><span class="section-icon">◌</span></div><label class="slider-label"><span>Opacity</span><output id="opacityValue">96%</output></label><input class="range" type="range" value="96" id="opacityRange"><label class="field-wide">Border radius <input value="999 px"></label><div class="shadow-row"><span>Shadow</span><span class="shadow-value">0 24 / 64 · 18%</span><span class="chevron">⌄</span></div></div>
+      </div>
+      <div class="inspector-content hidden" id="layersPanel"><div class="layers-list"><button class="layer active" data-layer-select="Orbit / blend"><span class="layer-icon circle-layer"></span><span>Orbit / blend</span><span class="eye">◉</span></button><button class="layer" data-layer-select="Signal card"><span class="layer-icon card-layer"></span><span>Signal card</span><span class="eye">◉</span></button><button class="layer" data-layer-select="Hero statement"><span class="layer-icon text-layer">T</span><span>Hero statement</span><span class="eye">◉</span></button></div></div>
+    </aside>
+  </main>
+
+  <section class="code-drawer" id="codeDrawer" aria-label="Exported code"><div class="drawer-header"><div><span class="eyebrow">Generated output</span><h2>Export your canvas</h2></div><button class="close-btn" id="closeDrawer" aria-label="Close code drawer">×</button></div><div class="code-tabs"><button class="code-tab active" data-code="html">index.html</button><button class="code-tab" data-code="css">styles.css</button><button class="code-tab" data-code="js">script.js</button><button class="copy-btn" id="copyCode">Copy code</button><button class="copy-btn" id="downloadCode">Download HTML</button></div><pre class="code-block" id="codeBlock"></pre></section>
+  <script src="script.js"></script>
+</body>
+</html>
